@@ -15,6 +15,9 @@
 
         ;;;;;; Markdown
     markdown-mode
+    
+        ;;;;;; shell
+    eshell
 
         ;;;;;; Javascript
     json-mode
