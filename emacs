@@ -83,6 +83,12 @@ there's a region, all lines that region covers will be duplicated."
 (global-linum-mode t) ;; enable line numbers globally
 (setq linum-format "%4d \u2502 ")
 
+;; mouse config
+(require 'mouse)
+(xterm-mouse-mode t)
+(defun track-mouse (e)) 
+(setq mouse-sel-mode t)
+
 ;; PYTHON CONFIGURATION
 ;; --------------------------------------
 
