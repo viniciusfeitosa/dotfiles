@@ -31,7 +31,8 @@
     elpy
     flycheck
     material-theme
-    py-autopep8)
+    py-autopep8
+    fiplr)
   "My packages!")
 
 ;; fetch the list of packages available
@@ -72,9 +73,15 @@ there's a region, all lines that region covers will be duplicated."
 
 (global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
 
+(setq fiplr-ignored-globs '((directories (".git" ".svn"))
+                            (files ("*.jpg" "*.png" "*.zip" "*~"))))
+
+(global-set-key (kbd "C-x f") 'fiplr-find-file)
+
 (setq inhibit-startup-message t) ;; hide the startup message
 (load-theme 'material t) ;; load material theme
 (global-linum-mode t) ;; enable line numbers globally
+(setq linum-format "%4d \u2502 ")
 
 ;; PYTHON CONFIGURATION
 ;; --------------------------------------
