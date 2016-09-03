@@ -101,6 +101,8 @@ there's a region, all lines that region covers will be duplicated."
 (setq fiplr-ignored-globs '((directories (".git" ".svn"))
                             (files ("*.jpg" "*.png" "*.zip" "*~"))))
 
+(global-set-key (kbd "C-x f") 'fiplr-find-file)
+
 (defun end-of-line-and-indented-new-line ()
   (interactive)
   (end-of-line)
