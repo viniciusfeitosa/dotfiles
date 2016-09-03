@@ -29,6 +29,7 @@
     better-defaults
     ein
     elpy
+    pydoc
     flycheck
     material-theme
     py-autopep8
@@ -71,23 +72,48 @@ there's a region, all lines that region covers will be duplicated."
         (setq end (point)))
       (goto-char (+ origin (* (length region) arg) arg)))))
 
+(defun move-region (start end n)
+  "Move the current region up or down by N lines."
+  (interactive "r\np")
+  (let ((line-text (delete-and-extract-region start end)))
+    (forward-line n)
+    (let ((start (point)))
+      (insert line-text)
+      (setq deactivate-mark nil)
+      (set-mark start))))
+
+(defun move-region-up (start end n)
+  "Move the current line up by N lines."
+  (interactive "r\np")
+  (move-region start end (if (null n) -1 (- n))))
+
+(defun move-region-down (start end n)
+  "Move the current line down by N lines."
+  (interactive "r\np")
+  (move-region start end (if (null n) 1 n)))
+
+(global-set-key (kbd "M-<up>") 'move-region-up)
+(global-set-key (kbd "M-<down>") 'move-region-down)
+
+
 (global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
 
 (setq fiplr-ignored-globs '((directories (".git" ".svn"))
                             (files ("*.jpg" "*.png" "*.zip" "*~"))))
 
-(global-set-key (kbd "C-x f") 'fiplr-find-file)
+(defun end-of-line-and-indented-new-line ()
+  (interactive)
+  (end-of-line)
+  (newline-and-indent))
+
+(global-set-key (kbd "C-l") 'end-of-line-and-indented-new-line)
+
+(global-set-key (kbd "C-c <left>") 'tabbar-backward-tab)
+(global-set-key (kbd "C-c <right>") 'tabbar-forward-tab)
 
 (setq inhibit-startup-message t) ;; hide the startup message
 (load-theme 'material t) ;; load material theme
 (global-linum-mode t) ;; enable line numbers globally
-(setq linum-format "%4d \u2502 ")
-
-;; mouse config
-(require 'mouse)
-(xterm-mouse-mode t)
-(defun track-mouse (e)) 
-(setq mouse-sel-mode t)
 
 ;; PYTHON CONFIGURATION
 ;; --------------------------------------
@@ -101,9 +127,11 @@ there's a region, all lines that region covers will be duplicated."
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;; enable autopep8 formatting on save
+
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 (setq elpy-rpc-backend "jedi")
+
 
 ;; GO  CONFIGURATION
 ;; --------------------------------------
@@ -142,9 +170,12 @@ there's a region, all lines that region covers will be duplicated."
 (add-hook 'go-mode-hook 'go-mode-setup)
 
 ;;Load auto-complete
+
 (ac-config-default)
 (require 'auto-complete-config)
-(require 'go-autocomplete)
+;; auto-complete to Golang
+(when (go-mode)
+  (require 'go-autocomplete))
 
 (add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
 (require 'golint)
