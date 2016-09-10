@@ -33,7 +33,9 @@
     flycheck
     material-theme
     py-autopep8
-    fiplr)
+    fiplr
+    ace-jump-mode
+    discover-my-major)
   "My packages!")
 
 ;; fetch the list of packages available
@@ -116,6 +118,23 @@ there's a region, all lines that region covers will be duplicated."
 (setq inhibit-startup-message t) ;; hide the startup message
 (load-theme 'material t) ;; load material theme
 (global-linum-mode t) ;; enable line numbers globally
+
+;;
+;; ace jump mode major function
+;; 
+(add-to-list 'load-path "/full/path/where/ace-jump-mode.el/in/")
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+;; you can select the key you prefer to
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+(global-set-key (kbd "C-h C-m") 'discover-my-major)
+(global-set-key (kbd "C-h M-m") 'discover-my-mode)
+
+(setq linum-format "%4d \u2502 ")
 
 ;; PYTHON CONFIGURATION
 ;; --------------------------------------
