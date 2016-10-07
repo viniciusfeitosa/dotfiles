@@ -35,6 +35,7 @@
     py-autopep8
     fiplr
     ace-jump-mode
+    magit
     discover-my-major)
   "My packages!")
 
@@ -54,6 +55,9 @@
 
 ;; BASIC CUSTOMIZATION
 ;; --------------------------------------
+(global-unset-key "\C-z")
+(global-set-key "\C-z" 'advertised-undo)
+
 (defun duplicate-current-line-or-region (arg)
   "Duplicates the current line or region ARG times.
 If there's no region, the current line will be duplicated. However, if
@@ -97,11 +101,19 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "M-<up>") 'move-region-up)
 (global-set-key (kbd "M-<down>") 'move-region-down)
 
+(defun delete-line-from-any-position ()
+  (interactive)
+  (beginning-of-line)
+  (kill-line)
+  (kill-line))
 
+(global-set-key (kbd "C-c k") 'delete-line-from-any-position)
+
+(setq mac-command-modifier 'meta)
 (global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
 
-(setq fiplr-ignored-globs '((directories (".git" ".svn"))
-                            (files ("*.jpg" "*.png" "*.zip" "*~"))))
+(setq fiplr-ignored-globs '((directories (".git" ".svn" "env"))
+                            (files ("*.jpg" "*.png" "*.zip" "*~" ".pyc"))))
 
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
 
@@ -116,7 +128,8 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "C-c <right>") 'tabbar-forward-tab)
 
 (setq inhibit-startup-message t) ;; hide the startup message
-(load-theme 'material t) ;; load material theme
+;;(load-theme 'material t) ;; load material theme
+(load-theme 'wombat t) ;; load material theme
 (global-linum-mode t) ;; enable line numbers globally
 
 ;;
@@ -140,7 +153,6 @@ there's a region, all lines that region covers will be duplicated."
 ;; --------------------------------------
 
 (elpy-enable)
-(elpy-use-ipython)
 
 ;; use flycheck not flymake with elpy
 (when (require 'flycheck nil t)
