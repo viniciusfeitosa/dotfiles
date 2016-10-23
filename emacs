@@ -36,6 +36,7 @@
     fiplr
     ace-jump-mode
     magit
+    autopair
     discover-my-major)
   "My packages!")
 
@@ -57,6 +58,9 @@
 ;; --------------------------------------
 (global-unset-key "\C-z")
 (global-set-key "\C-z" 'advertised-undo)
+
+(require 'autopair)
+(autopair-global-mode)
 
 (defun duplicate-current-line-or-region (arg)
   "Duplicates the current line or region ARG times.
