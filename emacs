@@ -39,6 +39,7 @@
     git-gutter
     yasnippet
     helm
+    helm-projectile
     autopair
     discover-my-major)
   "My packages!")
