@@ -21,6 +21,7 @@
 
         ;;;;;; Javascript
     json-mode
+    js2-mode
         ;;;;;; Env
     project-explorer
     smooth-scroll
@@ -41,8 +42,15 @@
     helm
     helm-projectile
     autopair
+    neotree
+    all-the-icons
     discover-my-major)
   "My packages!")
+
+;; NeoTree
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
 
 ;; fetch the list of packages available
 (unless package-archive-contents
@@ -70,6 +78,9 @@
 (projectile-global-mode)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
+
+;; js2-mode
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;; autopair config
 (require 'autopair)
@@ -130,6 +141,53 @@ there's a region, all lines that region covers will be duplicated."
   (kill-line))
 
 (global-set-key (kbd "C-c k") 'delete-line-from-any-position)
+
+(defun get-point (symbol &optional arg)
+ "get the point"
+ (funcall symbol arg)
+ (point)
+)
+     
+(defun copy-thing (begin-of-thing end-of-thing &optional arg)
+  "copy thing between beg & end into kill ring"
+   (save-excursion
+     (let ((beg (get-point begin-of-thing 1))
+    	 (end (get-point end-of-thing arg)))
+       (copy-region-as-kill beg end)))
+)
+     
+(defun paste-to-mark(&optional arg)
+  "Paste things to mark, or to the prompt in shell-mode"
+  (let ((pasteMe 
+    (lambda()
+       (if (string= "shell-mode" major-mode)
+         (progn (comint-next-prompt 25535) (yank))
+       (progn (goto-char (mark)) (yank) )))))
+    (if arg
+        (if (= arg 1)
+    	nil
+          (funcall pasteMe))
+      (funcall pasteMe))
+  ))
+
+(defun copy-word (&optional arg)
+ "Copy words at point into kill-ring"
+  (interactive "P")
+  (copy-thing 'backward-word 'forward-word arg)
+  ;;(paste-to-mark arg)
+)
+
+(global-set-key (kbd "C-c w") 'copy-word)
+
+(defun copy-line (&optional arg)
+ "Save current line into Kill-Ring without mark the line "
+  (interactive "P")
+  (copy-thing 'beginning-of-line 'end-of-line arg)
+  (paste-to-mark arg)
+)
+
+(global-set-key (kbd "C-c l") 'copy-line)
+
 (global-set-key (kbd "C-c f") 'rgrep)
 
 (setq mac-command-modifier 'meta)
@@ -253,7 +311,7 @@ there's a region, all lines that region covers will be duplicated."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (react-snippets django-snippets yasnippet window-number buffer-move smooth-scroll project-explorer json-mode markdown-mode go-autocomplete go-eldoc go-mode))))
+    (js2-mode react-snippets django-snippets yasnippet window-number buffer-move smooth-scroll project-explorer json-mode markdown-mode go-autocomplete go-eldoc go-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
