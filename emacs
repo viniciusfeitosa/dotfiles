@@ -36,6 +36,11 @@
     fiplr
     ace-jump-mode
     magit
+    git-gutter
+    yasnippet
+    helm
+    helm-projectile
+    autopair
     discover-my-major)
   "My packages!")
 
@@ -52,6 +57,23 @@
 (defun go-mode-setup ()
   (go-eldoc-setup))
 
+;; Load git-gutter global
+(require 'git-gutter)
+
+;; If you enable global minor mode
+(global-git-gutter-mode t)
+
+;; If you would like to use git-gutter.el and linum-mode
+(git-gutter:linum-setup)
+
+;; Heml config
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
+;; autopair config
+(require 'autopair)
+(autopair-global-mode)
 
 ;; BASIC CUSTOMIZATION
 ;; --------------------------------------
@@ -108,12 +130,13 @@ there's a region, all lines that region covers will be duplicated."
   (kill-line))
 
 (global-set-key (kbd "C-c k") 'delete-line-from-any-position)
+(global-set-key (kbd "C-c f") 'rgrep)
 
 (setq mac-command-modifier 'meta)
 (global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
 
 (setq fiplr-ignored-globs '((directories (".git" ".svn" "env"))
-                            (files ("*.jpg" "*.png" "*.zip" "*~" ".pyc"))))
+                            (files ("*.jpg" "*.png" "*.zip" "*~" "*.pyc"))))
 
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
 
@@ -129,7 +152,7 @@ there's a region, all lines that region covers will be duplicated."
 
 (setq inhibit-startup-message t) ;; hide the startup message
 ;;(load-theme 'material t) ;; load material theme
-(load-theme 'wombat t) ;; load material theme
+(load-theme 'tango-dark t) ;; load material theme
 (global-linum-mode t) ;; enable line numbers globally
 
 ;;
@@ -149,6 +172,13 @@ there's a region, all lines that region covers will be duplicated."
 
 (setq linum-format "%4d \u2502 ")
 
+
+;; yasnippet
+(add-to-list 'load-path
+              "~/.emacs.d/plugins/yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)
+
 ;; PYTHON CONFIGURATION
 ;; --------------------------------------
 
@@ -161,8 +191,8 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; enable autopep8 formatting on save
 
-(require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;;(require 'py-autopep8)
+;;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 (setq elpy-rpc-backend "jedi")
 
 
@@ -223,7 +253,7 @@ there's a region, all lines that region covers will be duplicated."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (window-number buffer-move smooth-scroll project-explorer json-mode markdown-mode go-autocomplete go-eldoc go-mode))))
+    (react-snippets django-snippets yasnippet window-number buffer-move smooth-scroll project-explorer json-mode markdown-mode go-autocomplete go-eldoc go-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
