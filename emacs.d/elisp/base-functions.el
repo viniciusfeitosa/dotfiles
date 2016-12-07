@@ -123,3 +123,10 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "C-l") 'end-of-line-and-indented-new-line)
 
 (setq linum-format "%4d \u2502 ")
+
+(defun show-file-name ()
+  "Show the full path file name in the minibuffer."
+  (interactive)
+  (message (buffer-file-name)))
+
+(global-set-key [f1] 'show-file-name) ; Or any other key you want
