@@ -28,6 +28,10 @@
   ;; Enable EDE only in C/C++
   (global-ede-mode))
 
+(setq-default c-basic-offset 4
+                  tab-width 4
+                  indent-tabs-mode t)
+
 (use-package ggtags
   :config
   (ggtags-mode 1)
