@@ -15,8 +15,8 @@
     ;; (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
     ;;flycheck-python-flake8-executable "/usr/local/bin/flake8"
     :bind (:map elpy-mode-map
-	      ("M-." . elpy-goto-definition)
-	      ("M-," . pop-tag-mark)))
+	      ("M->" . elpy-goto-definition)
+	      ("M-<" . pop-tag-mark)))
   (elpy-enable))
 
 (use-package pip-requirements
