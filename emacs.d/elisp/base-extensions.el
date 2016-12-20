@@ -127,6 +127,8 @@
 
 (use-package page-break-lines)
 
+(use-package github-browse-file)
+
 (use-package projectile
   :config
   (setq projectile-known-projects-file
@@ -167,6 +169,10 @@
 (use-package yasnippet
   :config
   (yas-global-mode 1))
+
+(use-package git-gutter+
+  :config
+  (global-git-gutter+-mode))
 
 (use-package evil
   :config
