@@ -133,6 +133,9 @@
   :config
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir))
+  (setq projectile-completion-system 'helm)
+  (helm-projectile-on)
+  (projectile-global-mode))
 
   (projectile-global-mode))
 
