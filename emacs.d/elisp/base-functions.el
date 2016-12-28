@@ -111,7 +111,7 @@ there's a region, all lines that region covers will be duplicated."
 
 (global-set-key (kbd "C-c l") 'copy-line)
 
-(global-set-key (kbd "C-c f") 'rgrep)
+(global-set-key (kbd "C-c r g") 'rgrep)
 
 (global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
 
