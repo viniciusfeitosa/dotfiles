@@ -137,8 +137,6 @@
   (helm-projectile-on)
   (projectile-global-mode))
 
-  (projectile-global-mode))
-
 (use-package recentf
   :config
   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
@@ -177,9 +175,9 @@
   :config
   (global-git-gutter+-mode))
 
-(use-package evil
-  :config
-  (evil-mode 1))
+;; (use-package evil
+;;   :config
+;;   (evil-mode 1))
 
 (use-package autopair
   :config
