@@ -49,7 +49,7 @@
          ("C-x C-f" . helm-find-files)
          ("C-x v" . helm-projectile)
          ("C-x c o" . helm-occur)
-         ("C-x c p" . helm-projectile-ag)
+         ("C-c f" . helm-projectile-ag)
          ("C-x c k" . helm-show-kill-ring)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)))
