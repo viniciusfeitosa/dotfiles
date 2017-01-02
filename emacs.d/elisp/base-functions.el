@@ -130,3 +130,6 @@ there's a region, all lines that region covers will be duplicated."
   (message (buffer-file-name)))
 
 (global-set-key [f1] 'show-file-name) ; Or any other key you want
+
+(setq mouse-wheel-scroll-amount '(3 ((shift) . 3) ((control) . nil)))
+(setq mouse-wheel-progressive-speed nil)
