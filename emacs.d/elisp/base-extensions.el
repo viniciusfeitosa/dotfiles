@@ -171,13 +171,9 @@
   :config
   (yas-global-mode 1))
 
-(use-package git-gutter+
+(use-package diff-hl
   :config
-  (global-git-gutter+-mode))
-
-;; (use-package evil
-;;   :config
-;;   (evil-mode 1))
+  (global-diff-hl-mode))
 
 (use-package autopair
   :config
