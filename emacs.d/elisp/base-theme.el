@@ -2,6 +2,6 @@
 ;;   :defer t
 ;;   :init
 ;;   (load-theme 'zenburn t))
-(load-theme 'wombat t)
+(load-theme 'adwaita t)
 
 (provide 'base-theme)
