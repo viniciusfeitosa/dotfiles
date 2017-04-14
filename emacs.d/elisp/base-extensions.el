@@ -179,4 +179,8 @@
   :config
   (autopair-global-mode))
 
+(use-package dumb-jump
+  :config
+  (dumb-jump-mode))
+
 (provide 'base-extensions)
