@@ -58,7 +58,7 @@
  history-length                     1000
  backup-inhibited                   nil
  make-backup-files                  t
- auto-save-default                  t
+ auto-save-default                  nil
  auto-save-list-file-name           (concat temp-dir "/autosave")
  make-backup-files                  t
  create-lockfiles                   nil
