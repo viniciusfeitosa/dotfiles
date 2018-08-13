@@ -112,11 +112,9 @@
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda))
 
-(use-package org-projectile
-  :config
-  (org-projectile:per-repo)
-  (setq org-projectile:per-repo-filename "todo.org"
-	org-agenda-files (append org-agenda-files (org-projectile:todo-files))))
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 (use-package org-bullets
   :config
