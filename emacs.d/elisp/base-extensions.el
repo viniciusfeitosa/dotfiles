@@ -35,8 +35,6 @@
 
 (use-package helm
   :init
-  (require 'helm-config)
-  :config
   (setq helm-split-window-in-side-p t
         helm-split-window-default-side 'below
 	helm-idle-delay 0.0
@@ -48,7 +46,7 @@
          ("C-x C-m" . helm-M-x)
          ("C-x C-f" . helm-find-files)
          ("C-x v" . helm-projectile)
-         ("C-x c o" . helm-occur)
+		 ("C-s"     . helm-occur)
          ("C-c f" . helm-projectile-ag)
          ("C-x c k" . helm-show-kill-ring)
          :map helm-map
@@ -172,10 +170,6 @@
 (use-package diff-hl
   :config
   (global-diff-hl-mode))
-
-(use-package autopair
-  :config
-  (autopair-global-mode))
 
 (use-package dumb-jump
   :config
